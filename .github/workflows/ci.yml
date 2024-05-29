@@ -1,0 +1,36 @@
+name: Node.js CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: install
+      run: npm install
+    - name: build
+      run: npm run build
+    - name: Docker Login
+      uses: docker/login-action@v3.2.0
+      with:
+        username: ${{secret.DOCKER.USERNAME}} 
+        password: ${{secret.DOCKER.PASSWORD}}
+    - name: Docker build
+      run: docker build -t ${{secret.DOCKER_USERNAME}}/${{secret.DOCKER_REPO}}
+    - name: Docker push
+      run: docker push ${{secret.DOCKER_USERNAME}}/${{secret.DOCKER_REPO}}
