@@ -35,7 +35,7 @@ jobs:
       run: docker push ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_REPO}}
       
     - name: ssh
-      uses: applyboy/ssh-action@v1.0.3
+      uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{secrets.SSH_HOST}}
         username: ${{secrets.SSH_USERNAME}}
