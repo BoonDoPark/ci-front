@@ -8,9 +8,7 @@ const BoardComponent = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        "http://34.31.213.72:8080/api/v1/boards"
-      );
+      const response = await axios.get("/api/v1/boards");
       setData(response.data);
     } catch (error) {
       console.error("There was an error fetching the data!", error);
@@ -25,10 +23,7 @@ const BoardComponent = () => {
     };
 
     try {
-      const request = await axios.post(
-        "http://34.31.213.72:8080/api/v1/boards",
-        body
-      );
+      const request = await axios.post("/api/v1/boards", body);
       fetchData();
       console.log(request.data);
     } catch (e) {
