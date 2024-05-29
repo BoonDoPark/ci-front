@@ -9,7 +9,7 @@ const BoardComponent = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://34.70.58.154:8080/api/v1/boards"
+        "http://34.31.213.72:8080/api/v1/boards"
       );
       setData(response.data);
     } catch (error) {
@@ -26,7 +26,7 @@ const BoardComponent = () => {
 
     try {
       const request = await axios.post(
-        "http://34.70.58.154:8080/api/v1/boards",
+        "http://34.31.213.72:8080/api/v1/boards",
         body
       );
       fetchData();
