@@ -1,9 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import CommentComponent from "./CommentComponent";
-
-const BoardComponent = () => {
-  const [name, setName] = useState("");
+const CommentComponent = () => {
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
 
@@ -19,7 +14,6 @@ const BoardComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = {
-      name: name,
       text: text,
     };
 
@@ -43,33 +37,24 @@ const BoardComponent = () => {
           <div>
             <input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            ></input>
-            <input
-              type="text"
               value={text}
               onChange={(e) => setText(e.target.value)}
             ></input>
           </div>
           <div>
-            <button>board</button>
+            <button>comment</button>
           </div>
         </form>
         <div>
           {/* {data.map((data) => (
             <div>
-              <p key={data.id}>
-                {data.name} : {data.text}
+              <p>
+                {data.id}. {data.text}
               </p>
-              <input>댓글 입력</input>
             </div>
           ))} */}
           <div>
-            <p key={1} onClick={CommentComponent}>
-              {name} : {text}
-            </p>
-            {/* <button>댓글 입력</button> */}
+            <p>1. {text}</p>
           </div>
         </div>
       </div>
@@ -77,4 +62,4 @@ const BoardComponent = () => {
   );
 };
 
-export default BoardComponent;
+export default CommentComponent;
