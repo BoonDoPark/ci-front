@@ -6,6 +6,7 @@ const BoardComponent = () => {
   const [name, setName] = useState("");
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
+  const [selectedBoardId, setSelectedBoardId] = useState(null);
 
   const fetchData = async () => {
     try {
@@ -57,20 +58,19 @@ const BoardComponent = () => {
           </div>
         </form>
         <div>
-          {/* {data.map((data) => (
-            <div>
-              <p key={data.id}>
+          {data.map((data) => (
+            <div key={data.id}>
+              <p>
                 {data.name} : {data.text}
               </p>
-              <input>댓글 입력</input>
+              <button onClick={() => setSelectedBoardId(data.id)}>
+                댓글 입력
+              </button>
+              {selectedBoardId === data.id && (
+                <CommentComponent boardId={data.id} />
+              )}
             </div>
-          ))} */}
-          <div>
-            <p key={1} onClick={CommentComponent}>
-              {name} : {text}
-            </p>
-            {/* <button>댓글 입력</button> */}
-          </div>
+          ))}
         </div>
       </div>
     </>

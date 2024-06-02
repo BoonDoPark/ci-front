@@ -1,10 +1,13 @@
-const CommentComponent = () => {
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+const CommentComponent = ({ boardId }) => {
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("/api/v1/boards");
+      const response = await axios.get(`/api/v1/comments/${boardId}`);
       setData(response.data);
     } catch (error) {
       console.error("There was an error fetching the data!", error);
@@ -15,10 +18,11 @@ const CommentComponent = () => {
     e.preventDefault();
     const body = {
       text: text,
+      boardId: boardId,
     };
 
     try {
-      const request = await axios.post("/api/v1/boards", body);
+      const request = await axios.post("/api/v1/comments", body);
       fetchData();
       console.log(request.data);
     } catch (e) {
@@ -46,16 +50,13 @@ const CommentComponent = () => {
           </div>
         </form>
         <div>
-          {/* {data.map((data) => (
-            <div>
+          {data.map((data) => (
+            <div key={data.id}>
               <p>
-                {data.id}. {data.text}
+                {data.text}: {data.createAt}
               </p>
             </div>
-          ))} */}
-          <div>
-            <p>1. {text}</p>
-          </div>
+          ))}
         </div>
       </div>
     </>
